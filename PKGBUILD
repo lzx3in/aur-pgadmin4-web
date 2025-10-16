@@ -1,6 +1,6 @@
 pkgname=pgadmin4-web
-pkgver=9.8
-pkgrel=2
+pkgver=9.9
+pkgrel=1
 pkgdesc='The web interface for pgAdmin, hosted under Apache HTTPD. pgAdmin is the most popular and feature rich Open Source administration and development platform for PostgreSQL, the most advanced Open Source database in the world.'
 arch=('x86_64')
 license=('PostgreSQL')
@@ -9,7 +9,7 @@ depends=("pgadmin4-server>=${pkgver}-1")
 makedepends=("syft")
 provides=('pgadmin4-web')
 source=("pgadmin4-${pkgver}.tar.gz::https://ftp.postgresql.org/pub/pgadmin/pgadmin4/v${pkgver}/source/pgadmin4-${pkgver}.tar.gz")
-sha256sums=('44f10393724d3a512d871e051dd00b6430c41d0cf7054c28bc1b0f6f87426864')
+sha256sums=('108e16272f82a87eb6483f401f54e46326da8c48e014ab2dd742640dc6f995f2')
 
 build() {
   cd "$srcdir/pgadmin4-${pkgver}"
