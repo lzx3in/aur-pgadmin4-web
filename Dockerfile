@@ -7,7 +7,9 @@ RUN pacman -Syu --noconfirm && \
       # Required by makepkg itself
       sudo fakeroot debugedit binutils \
       # Download pgadmin4-server package
-      wget jq
+      wget jq \
+      # Build mod_wsgi
+      gcc make
 
 RUN RELEASE_INFO=$(curl -s https://api.github.com/repos/lzx3in/aur-pgadmin4/releases/tags/dev) && \
     TARGET_URL=$(echo ${RELEASE_INFO} | jq -r '.assets[].browser_download_url' | grep pgadmin4-server | grep -v debug) && \
@@ -22,6 +24,10 @@ RUN useradd -m -u 1001 -s /bin/zsh builder && \
 USER builder
 
 WORKDIR /build
+
+RUN git clone https://aur.archlinux.org/mod_wsgi.git && \
+    cd mod_wsgi && \
+    makepkg -si --noconfirm
 
 RUN git clone --branch dev https://github.com/lzx3in/aur-pgadmin4-web.git
 
