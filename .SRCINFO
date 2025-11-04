@@ -7,6 +7,8 @@ pkgbase = pgadmin4-web
 	license = PostgreSQL
 	makedepends = syft
 	makedepends = patch
+	makedepends = gcc
+	makedepends = make
 	depends = pgadmin4-server>=9.9-1
 	depends = apache
 	depends = mod_wsgi

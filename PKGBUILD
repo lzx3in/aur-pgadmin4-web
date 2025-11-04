@@ -6,7 +6,7 @@ arch=('x86_64')
 license=('PostgreSQL')
 url='https://www.pgadmin.org/'
 depends=("pgadmin4-server>=${pkgver}-1" "apache" "mod_wsgi")
-makedepends=("syft" "patch")
+makedepends=("syft" "patch" "gcc" "make")
 provides=('pgadmin4-web')
 source=("pgadmin4-${pkgver}.tar.gz::https://ftp.postgresql.org/pub/pgadmin/pgadmin4/v${pkgver}/source/pgadmin4-${pkgver}.tar.gz" "web.patch")
 sha256sums=('108e16272f82a87eb6483f401f54e46326da8c48e014ab2dd742640dc6f995f2' 'c1cf92c06d5e6133212be5aeed06cdab60b22745c43a21136c9905c4f0724014')
