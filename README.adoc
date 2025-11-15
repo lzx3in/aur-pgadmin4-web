@@ -1,1 +1,85 @@
-= AUR-PGADMIN4-WEB
+= pgAdmin 4 Web Package for Arch Linux
+
+image:https://img.shields.io/aur/version/pgadmin4-web[AUR Version,link=https://aur.archlinux.org/packages/pgadmin4-web]
+image:https://img.shields.io/aur/maintainer/pgadmin4-web[AUR Maintainer,link=https://aur.archlinux.org/packages/pgadmin4-web]
+image:https://img.shields.io/aur/license/pgadmin4-web[AUR License,link=https://aur.archlinux.org/packages/pgadmin4-web]
+
+This repository is a mirror of https://aur.archlinux.org/packages/pgadmin4-web[pgadmin4-web AUR package] with added development tools. This package provides the web interface component of pgAdmin 4 for Arch Linux, built from the official source code.
+
+== Branches
+
+This repository has two main branches:
+
+* `master`: Mirror of the AUR repository. This branch contains only the PKGBUILD and related files as they appear in the AUR.
+* `dev`: Built upon the `master` branch, this branch includes additional development tools such as Dockerfile and GitHub Actions workflows for easier building and testing.
+
+== What is pgAdmin 4?
+
+pgAdmin is the most popular and feature rich Open Source administration and development platform for PostgreSQL, the most advanced Open Source database in the world. The official project is hosted at https://github.com/pgadmin-org/pgadmin4[pgadmin-org/pgadmin4 on GitHub].
+
+== Package Relationships
+
+In the pgAdmin 4 ecosystem for Arch Linux, the functionality is distributed across multiple packages to support the two primary deployment modes: server mode (web-based access) and desktop mode (standalone application). The Arch User Repository (AUR) hosts four interrelated packages that cater to these modes:
+
+* **pgadmin4** (Meta Package): A convenience package that depends on all other components, allowing users to easily install the full pgAdmin 4 suite.
+
+* **pgadmin4-server**: This package provides the core backend server components, written in Python/Flask, which are essential for both deployment modes. It handles database connectivity, business logic, and API endpoints. All other packages depend on this for basic functionality.
+
+* **pgadmin4-web**: Designed for server mode, this package contains the necessary configuration files and setup scripts to deploy pgAdmin 4 as a web application under Apache HTTP Server with mod_wsgi.
+
+* **pgadmin4-desktop**: Designed for desktop mode, this package bundles the Electron-based runtime that combines the server and UI into a standalone executable. It depends on pgadmin4-server for backend operations but provides a native desktop experience without requiring a web browser.
+
+The package split offers flexibility: users can install only the components needed for their preferred mode. For instance:
+
+* **Server mode**: Install pgadmin4-server and pgadmin4-web (or use the meta package pgadmin4).
+
+* **Desktop mode**: Install pgadmin4-server and pgadmin4-desktop (or use the meta package pgadmin4).
+
+This package, pgadmin4-web, provides the web interface components for server mode deployment.
+
+== Installation
+
+This package is available on the link:https://aur.archlinux.org/packages/pgadmin4-web[Arch User Repository (AUR)] as `pgadmin4-web`. Note that this package depends on `pgadmin4-server`.
+
+=== Using an AUR helper (e.g. paru):
+
+When using an AUR helper such as paru, dependencies including `pgadmin4-server` will be automatically resolved and installed:
+
+[,bash]
+----
+paru -Sy pgadmin4-web
+----
+
+=== Manual installation:
+
+When installing manually, you'll need to install dependencies yourself since AUR helpers cannot automatically resolve AUR dependencies during manual installation:
+
+[,bash]
+----
+# First install the dependency
+git clone https://aur.archlinux.org/pgadmin4-server.git
+cd pgadmin4-server
+makepkg -si
+cd ..
+
+# Then install this package
+git clone https://aur.archlinux.org/pgadmin4-web.git
+cd pgadmin4-web
+makepkg -si
+----
+
+After installation, follow the setup instructions provided by the package to configure the web interface with Apache HTTP Server.
+
+== Community Collaboration
+
+This repository primarily hosts packaging files for Arch Linux's AUR. For effective community collaboration, please direct your discussions to the appropriate channels:
+
+* **AUR-related discussions**: For issues specifically related to the AUR packaging (PKGBUILD, installation, dependencies, etc.), please participate in the AUR community discussion at the link:https://aur.archlinux.org/packages/pgadmin4-web[AUR package page].
+
+* **Software-related discussions**: For discussions about pgAdmin 4 functionality, bugs, or feature requests, please use the upstream repository link:https://github.com/pgadmin-org/pgadmin4[pgadmin-org/pgadmin4] or the mailing lists:
+** Developer discussions: mailto:pgadmin-hackers@lists.postgresql.org[pgadmin-hackers@lists.postgresql.org]
+** Support discussions: mailto:pgadmin-support@lists.postgresql.org[pgadmin-support@lists.postgresql.org]
+
+* **Issues in this repository**: Please note that the vast majority of discussions are better suited for the channels listed above. Issues in this repository are typically only appropriate if they are specifically related to the dev branch (e.g., development tools, Dockerfile, CI workflows).
+
+This approach ensures that discussions reach the right audience and get addressed more efficiently.
