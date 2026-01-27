@@ -18,11 +18,11 @@ USER builder
 
 WORKDIR /build
 
-RUN git clone https://aur.archlinux.org/paru-bin.git && \
-    cd paru-bin && \
+RUN git clone https://aur.archlinux.org/yay-bin.git && \
+    cd yay-bin && \
     makepkg -si --noconfirm
 
-RUN paru -Sy mod_wsgi pgadmin4-server --noconfirm
+RUN yay -Sy mod_wsgi pgadmin4-server --noconfirm
 
 RUN git clone --branch dev https://github.com/lzx3in/aur-pgadmin4-web.git
 
